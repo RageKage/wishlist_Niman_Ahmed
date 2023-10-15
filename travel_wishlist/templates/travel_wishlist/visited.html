@@ -1,21 +1,18 @@
-<h2>Example</h2>
+{% extends 'travel_wishlist/base.html'%} {% block content %}
+<h2>Places you visited</h2>
 
+{% if visited %}
 
-
-{% if visited%}
-
-<ul>
-    {% for place in visited%}
-    <li>{{place.name}}</li>
-    {% endfor %}
+<ul class="places-list">
+  {% for place in visited %}
+  <li class="visited-place" id="visited-place-{{ place.pk }}">{{ place.name }}</li>
+  {% endfor %}
 </ul>
 
 {% else %}
 
-<p>You haven't visited any places yet.</p>
+<p id="no-visited-places">You haven't visited any places yet.</p>
 
-{% endif %}
+{% endif %} 
 
-<a href="{% url 'place_list' %}">Back</a>
-```
-
+{% endblock %}
