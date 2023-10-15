@@ -1,0 +1,21 @@
+<h2>Example</h2>
+
+
+
+{% if visited%}
+
+<ul>
+    {% for place in visited%}
+    <li>{{place.name}}</li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<p>You haven't visited any places yet.</p>
+
+{% endif %}
+
+<a href="{% url 'place_list' %}">Back</a>
+```
+
