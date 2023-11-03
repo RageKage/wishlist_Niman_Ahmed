@@ -1,24 +1,37 @@
-{% extends 'travel_wishlist/base.html'%}
-{% block content %}
-  <h2>Travel Wishlist</h2>
+{% extends 'travel_wishlist/base.html'%} {% block content %}
 
-  <form method="POST" action="{% url 'place_list' %}">
-    {% csrf_token %}
-    {{ new_place_form }}
-    <button id="add-new-place">ADD</button>
-  </form>
+<form method="POST" action="{% url 'place_list' %}" class="form-add">
+  {% csrf_token %} {{ new_place_form }}
 
+  <button id="add-new-place">ADD</button>
+</form>
+
+<div class="container">
   {% for place in places %}
-  <div class="places">
-    <span id="place-name-{{ place.pk }}">{{ place.name }}</span>
-    <form method="POST" action="{% url 'place_was_visited' place.pk %}">
-      {% csrf_token %}
-      <button id="visited-button-{{ place.pk }}">visited!</button>
-    </form>
-  </div>
+
+  <a
+    href="{% url 'place_infos' place.pk %}"
+    style="text-decoration: none; color: inherit"
+  >
+    <div class="places">
+      <span id="place-name-{{ place.pk }}"> {{ place.name }} </span>
+
+      <form
+        method="POST"
+        class="form-visited"
+        action="{% url 'place_was_visited' place.pk %}"
+      >
+        {% csrf_token %}
+        <button id="visited-button-{{ place.pk }}">visited!</button>
+      </form>
+    </div>
+  </a>
+
   {% empty %}
   <div>
     <p>No places added to the wishlist yet.</p>
   </div>
   {% endfor %}
+</div>
+
 {% endblock %}

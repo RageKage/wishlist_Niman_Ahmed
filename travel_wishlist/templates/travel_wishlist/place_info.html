@@ -1,0 +1,28 @@
+{% extends 'travel_wishlist/base.html'%} {% load static %} {% block content %}
+
+<h3>{{place.name}}</h3>
+<div class="Place_info-div">
+  {% if place.visited %}
+  <p>You have visited <strong> {{place.name}}</strong></p>
+  {% else %}
+  <p>You have not visited <strong> {{place.name}}</strong></p>
+
+  <div class="action_buttons">
+    <form action="{% url 'place_was_visited' place.pk %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Mark as visited</button>
+    </form>
+
+    {% endif %}
+
+    <form action="{% url 'delete_place' place.pk %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary" id="delete">Delete</button>
+    </form>
+  </div>
+</div>
+
+<script src="{% static 'js/confirm_delete.js' %}"></script>
+<!-- Corrected line to include static JS file -->
+
+{% endblock %}

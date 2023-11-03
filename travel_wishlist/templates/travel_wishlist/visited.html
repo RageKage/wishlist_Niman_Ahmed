@@ -2,12 +2,18 @@
 <h2>Places you visited</h2>
 
 {% if visited %}
-
-<ul class="places-list">
+<div class="places-list"> 
   {% for place in visited %}
-  <li class="visited-place" id="visited-place-{{ place.pk }}">{{ place.name }}</li>
-  {% endfor %}
-</ul>
+  <a href="{% url 'place_infos' place.pk %}" class="visited-place-link">
+    <div class="visited-place" id="visited-place-{{ place.pk }}"> 
+      <div> 
+        {{ place.name }}
+      </div>
+    </div>
+  </a>
+{% endfor %}
+
+</div>
 
 {% else %}
 
