@@ -20,7 +20,15 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls), # this is the admin page url
     path('', include('travel_wishlist.urls')),  # this is the home page url so if it's not admin it will go default url in travel_wishlist/urls.py
+    
 
     
     
 ]
+
+# if this runs local then add these into the static directory
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
